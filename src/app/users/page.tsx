@@ -12,7 +12,8 @@ const Users = () => {
       return data;
     },
   });
-  console.log("isLoading", isLoading);
+
+  console.log("isLoading", data);
 
   return (
     <>
