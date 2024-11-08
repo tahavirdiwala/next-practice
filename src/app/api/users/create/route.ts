@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       role.users.push(user._id);
       await role.save();
     } else {
-      NextResponse.json({
+      return NextResponse.json({
         statusCode: 401,
         message: "Role does not exist",
       });
