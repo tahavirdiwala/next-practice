@@ -11,9 +11,10 @@ const Users = () => {
       const { data } = await userService.getAll();
       return data;
     },
+    gcTime: 0, // comment this if you want default caching in your api
   });
 
-  console.log("isLoading", data);
+  console.log({ isLoading });
 
   return (
     <>
