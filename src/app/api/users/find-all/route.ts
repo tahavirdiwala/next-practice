@@ -2,7 +2,7 @@ import connectDb from "@/dbConfig";
 import { NextResponse } from "next/server";
 import User from "@/models/user.model";
 
-await connectDb();
+connectDb();
 
 export async function GET() {
   try {

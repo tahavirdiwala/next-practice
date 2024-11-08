@@ -2,7 +2,7 @@ import connectDb from "@/dbConfig";
 import { NextResponse } from "next/server";
 import Role from "@/models/role.model";
 
-await connectDb();
+connectDb();
 
 export async function GET() {
   try {
