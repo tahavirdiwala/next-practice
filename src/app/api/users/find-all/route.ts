@@ -14,8 +14,6 @@ export async function GET() {
       data: users,
     });
   } catch (error) {
-    console.log("error", error);
-
     return NextResponse.json({ error: error, statusCode: 500 });
   }
 }

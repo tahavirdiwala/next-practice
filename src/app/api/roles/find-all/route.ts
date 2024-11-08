@@ -13,7 +13,6 @@ export async function GET() {
       data: roles,
     });
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json({ error: error, statusCode: 500 });
   }
 }
