@@ -1,6 +1,7 @@
 import connectDb from "@/dbConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import Role from "@/models/role.model";
+import commonDecorators from "@/common";
 
 connectDb();
 
@@ -10,24 +11,17 @@ export async function POST(request: NextRequest) {
     const role = new Role({ ...body });
 
     await role.save();
-    return NextResponse.json({
-      message: "Role Created SuccessFully",
-      statusCode: 201,
-    });
+    return commonDecorators.responser("Role Created SuccessFully", 201);
   } catch (error) {
-    return NextResponse.json({ error: error, statusCode: 500 });
+    return commonDecorators.responser(`${error}`, 500);
   }
 }
 
 export async function GET() {
   try {
-    const roles = await Role.find().populate("users");
-    return NextResponse.json({
-      statusCode: 200,
-      message: "Roles Fetched SuccessFully",
-      data: roles,
-    });
+    const roles = await Role.find();
+    return commonDecorators.responser("Roles Fetched SuccessFully", 200, roles);
   } catch (error) {
-    return NextResponse.json({ error: error, statusCode: 500 });
+    return commonDecorators.responser(`${error}`, 500);
   }
 }

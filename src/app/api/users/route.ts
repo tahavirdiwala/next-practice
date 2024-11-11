@@ -1,7 +1,8 @@
 import connectDb from "@/dbConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import Role from "@/models/role.model";
 import User from "@/models/user.model";
+import commonDecorators from "@/common";
 
 connectDb();
 
@@ -16,31 +17,21 @@ export async function POST(request: NextRequest) {
       role.users.push(user._id);
       await role.save();
     } else {
-      return NextResponse.json({
-        statusCode: 401,
-        message: "Role does not exist",
-      });
+      return commonDecorators.responser("Role does not exist", 401);
     }
 
     await user.save();
-    return NextResponse.json({
-      message: "User Created SuccessFully",
-      statusCode: 201,
-    });
+    return commonDecorators.responser("User Created SuccessFully", 201);
   } catch (error) {
-    return NextResponse.json({ error: error, statusCode: 500 });
+    return commonDecorators.responser(`${error}`, 500);
   }
 }
 
 export async function GET() {
   try {
     const users = await User.find();
-    return NextResponse.json({
-      statusCode: 200,
-      message: "Users Fetched SuccessFully",
-      data: users,
-    });
+    return commonDecorators.responser("Users Fetched SuccessFully", 200, users);
   } catch (error) {
-    return NextResponse.json({ error: error, statusCode: 500 });
+    return commonDecorators.responser(`${error}`, 500);
   }
 }
