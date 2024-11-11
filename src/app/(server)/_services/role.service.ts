@@ -18,6 +18,12 @@ class RoleService {
       Role.find().then(resolve).catch(reject);
     });
   }
+
+  get(_id: string) {
+    return new Promise((resolve, reject) => {
+      Role.findOne({ _id }).then(resolve).catch(reject);
+    });
+  }
 }
 
 const roleService = new RoleService();

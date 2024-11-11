@@ -5,7 +5,8 @@ const RESPONSE_MESSAGE = {
   },
   roles: {
     add: "Role Created SuccessFully",
-    getAll: "Role Fetched SuccessFully",
+    getAll: "Roles Fetched SuccessFully",
+    get: "Role Fetched SuccessFully",
   },
 };
 
