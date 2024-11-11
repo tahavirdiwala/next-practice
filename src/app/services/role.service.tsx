@@ -1,13 +1,14 @@
 import axios from "axios";
 
-class UserService {
+class RoleService {
   add(payload: unknown) {
     return axios.post("/api/users", payload);
   }
   getAll() {
-    return axios.get("/api/users");
+    return axios.get("/api/roles");
   }
 }
 
-const userService = new UserService();
-export default userService;
+const roleService = new RoleService();
+
+export default roleService;
