@@ -18,3 +18,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error, statusCode: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    const roles = await Role.find().populate("users");
+    return NextResponse.json({
+      statusCode: 200,
+      message: "Roles Fetched SuccessFully",
+      data: roles,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error, statusCode: 500 });
+  }
+}
