@@ -13,7 +13,7 @@ async function POST(request: NextRequest) {
     await userService.add(request);
     return responser(MESSAGE.users.add, StatusCodes.CREATED);
   } catch (error) {
-    return responser(`${error}`, 401);
+    return responser(`${error}`, StatusCodes.BAD_REQUEST);
   }
 }
 
