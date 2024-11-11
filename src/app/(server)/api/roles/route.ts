@@ -20,7 +20,7 @@ async function POST(request: NextRequest) {
 async function GET() {
   try {
     const roles = await roleService.getAll();
-    responser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
+    return responser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
   } catch (error) {
     return responser(`${error}`, StatusCodes.BAD_REQUEST);
   }
