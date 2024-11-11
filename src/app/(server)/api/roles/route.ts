@@ -3,24 +3,26 @@ import { NextRequest } from "next/server";
 import commonDecorators from "@/common";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import roleService from "../../_services/role.service";
+import { StatusCodes } from "http-status-codes";
 
 connectDb();
+const { responser } = commonDecorators;
 
 async function POST(request: NextRequest) {
   try {
     await roleService.add(request);
-    return commonDecorators.responser(MESSAGE.roles.add, 201);
+    return responser(MESSAGE.roles.add, StatusCodes.CREATED);
   } catch (error) {
-    return commonDecorators.responser(`${error}`, 500);
+    return responser(`${error}`, StatusCodes.BAD_REQUEST);
   }
 }
 
 async function GET() {
   try {
     const roles = await roleService.getAll();
-    return commonDecorators.responser(MESSAGE.roles.getAll, 200, roles);
+    responser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
   } catch (error) {
-    return commonDecorators.responser(`${error}`, 500);
+    return responser(`${error}`, StatusCodes.BAD_REQUEST);
   }
 }
 

@@ -3,24 +3,26 @@ import { NextRequest } from "next/server";
 import commonDecorators from "@/common";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import userService from "../../_services/user.service";
+import { StatusCodes } from "http-status-codes";
 
 connectDb();
+const { responser } = commonDecorators;
 
 async function POST(request: NextRequest) {
   try {
     await userService.add(request);
-    return commonDecorators.responser(MESSAGE.users.add, 201);
+    return responser(MESSAGE.users.add, StatusCodes.CREATED);
   } catch (error) {
-    return commonDecorators.responser(`${error}`, 401);
+    return responser(`${error}`, 401);
   }
 }
 
 async function GET() {
   try {
     const users = await userService.getAll();
-    return commonDecorators.responser(MESSAGE.roles.getAll, 200, users);
+    return responser(MESSAGE.roles.getAll, StatusCodes.OK, users);
   } catch (error) {
-    return commonDecorators.responser(`${error}`, 500);
+    return responser(`${error}`, StatusCodes.BAD_REQUEST);
   }
 }
 

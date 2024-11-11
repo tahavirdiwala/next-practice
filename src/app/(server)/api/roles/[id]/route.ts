@@ -2,9 +2,11 @@ import roleService from "@/app/(server)/_services/role.service";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import commonDecorators from "@/common";
 import connectDb from "@/dbConfig";
+import { StatusCodes } from "http-status-codes";
 import { NextRequest } from "next/server";
 
 connectDb();
+const { responser } = commonDecorators;
 
 async function GET(
   request: NextRequest,
@@ -13,9 +15,9 @@ async function GET(
   try {
     const ctx = await context.params;
     const role = await roleService.get(ctx.id);
-    return commonDecorators.responser(MESSAGE.roles.get, 200, role);
+    return responser(MESSAGE.roles.get, StatusCodes.OK, role);
   } catch (error) {
-    return commonDecorators.responser(`${error}`, 500);
+    return responser(`${error}`, StatusCodes.BAD_REQUEST);
   }
 }
 
