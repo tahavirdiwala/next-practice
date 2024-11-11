@@ -1,7 +1,7 @@
 import axios from "axios";
 class UserService {
   getAll() {
-    return axios.get("https://dummyjson.com/users");
+    return axios.get("/api/users/find-all");
   }
 }
 

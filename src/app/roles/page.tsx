@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 
-const Users = () => {
+const Roles = () => {
   return <></>;
 };
 
-export default Users;
+export default Roles;
