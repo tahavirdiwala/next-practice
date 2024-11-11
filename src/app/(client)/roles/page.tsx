@@ -6,8 +6,8 @@ const Roles = async () => {
   const data = await (await GET()).json();
 
   return data?.data?.map((item: { _id: string; role: string }) => (
-    <li key={item?._id}>
-      <Link href={`/roles/${item?._id}`}>{item?.role}</Link>
+    <li key={item._id}>
+      <Link href={`/roles/${item._id}`}>{item.role}</Link>
     </li>
   ));
 };
