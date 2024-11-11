@@ -1,27 +1,24 @@
 import connectDb from "@/dbConfig";
 import { NextRequest } from "next/server";
-import Role from "@/models/role.model";
 import commonDecorators from "@/common";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
+import userService from "../../_services/user.service";
 
 connectDb();
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const role = new Role({ ...body });
-
-    await role.save();
-    return commonDecorators.responser(MESSAGE.roles.add, 201);
+    await userService.add(request);
+    return commonDecorators.responser(MESSAGE.users.add, 201);
   } catch (error) {
-    return commonDecorators.responser(`${error}`, 500);
+    return commonDecorators.responser(`${error}`, 401);
   }
 }
 
 export async function GET() {
   try {
-    const roles = await Role.find();
-    return commonDecorators.responser(MESSAGE.roles.getAll, 200, roles);
+    const users = await userService.getAll();
+    return commonDecorators.responser(MESSAGE.roles.getAll, 200, users);
   } catch (error) {
     return commonDecorators.responser(`${error}`, 500);
   }
