@@ -6,7 +6,7 @@ import userService from "../../_services/user.service";
 
 connectDb();
 
-export async function POST(request: NextRequest) {
+async function POST(request: NextRequest) {
   try {
     await userService.add(request);
     return commonDecorators.responser(MESSAGE.users.add, 201);
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+async function GET() {
   try {
     const users = await userService.getAll();
     return commonDecorators.responser(MESSAGE.roles.getAll, 200, users);
@@ -23,3 +23,5 @@ export async function GET() {
     return commonDecorators.responser(`${error}`, 500);
   }
 }
+
+export { POST, GET };

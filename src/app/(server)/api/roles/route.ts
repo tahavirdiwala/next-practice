@@ -6,7 +6,7 @@ import roleService from "../../_services/role.service";
 
 connectDb();
 
-export async function POST(request: NextRequest) {
+async function POST(request: NextRequest) {
   try {
     await roleService.add(request);
     return commonDecorators.responser(MESSAGE.roles.add, 201);
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+async function GET() {
   try {
     const roles = await roleService.getAll();
     return commonDecorators.responser(MESSAGE.roles.getAll, 200, roles);
@@ -23,3 +23,5 @@ export async function GET() {
     return commonDecorators.responser(`${error}`, 500);
   }
 }
+
+export { POST, GET };
