@@ -1,7 +1,7 @@
 import { RoleInterFace } from "@/types/role";
 import RoleList from "./_components/roleList";
 
-const getRoles = async (): ReturnResponse<RoleInterFace[]> => {
+const getRoles = async (): GETResponse<RoleInterFace[]> => {
   const data = await fetch(`${process.env.CLIENT_URL}/roles`);
   return data.json();
 };
