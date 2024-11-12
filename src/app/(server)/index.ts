@@ -11,7 +11,7 @@ const { trpcResponser } = commonDecorators;
 await connectDb();
 
 export const appRouter = router({
-  "get-role": publicProcedure.query(
+  "get-roles": publicProcedure.query(
     async (): GETTRPCResponse<RoleInterFace[]> => {
       try {
         const roles = await roleService.getAll();
