@@ -1,6 +1,6 @@
 import roleService from "@/app/(server)/_services/role.service";
+import commonDecorators from "@/app/(server)/common";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
-import commonDecorators from "@/common";
 import connectDb from "@/dbConfig";
 import { StatusCodes } from "http-status-codes";
 import { NextRequest } from "next/server";

@@ -1,9 +1,9 @@
 import connectDb from "@/dbConfig";
 import { NextRequest } from "next/server";
-import commonDecorators from "@/common";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import roleService from "../../_services/role.service";
 import { StatusCodes } from "http-status-codes";
+import commonDecorators from "../../common";
 
 connectDb();
 const { responser } = commonDecorators;
