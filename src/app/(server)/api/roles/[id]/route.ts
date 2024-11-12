@@ -1,5 +1,5 @@
+import commonDecorators from "@/app/(server)/_common";
 import roleService from "@/app/(server)/_services/role.service";
-import commonDecorators from "@/app/(server)/common";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import connectDb from "@/dbConfig";
 import { StatusCodes } from "http-status-codes";
