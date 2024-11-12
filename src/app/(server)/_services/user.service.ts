@@ -1,4 +1,4 @@
-import { UserInterFace } from "@/interfaces/user";
+import { UserInterFace } from "@/types/user";
 import Role from "@/models/role.model";
 import User from "@/models/user.model";
 import { NextRequest } from "next/server";

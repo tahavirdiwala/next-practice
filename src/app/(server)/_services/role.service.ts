@@ -1,4 +1,4 @@
-import { RoleInterFace } from "@/interfaces/role";
+import { RoleInterFace } from "@/types/role";
 import Role from "@/models/role.model";
 import { NextRequest } from "next/server";
 

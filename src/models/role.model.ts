@@ -1,4 +1,4 @@
-import { RoleInterFace } from "@/interfaces/role";
+import { RoleInterFace } from "@/types/role";
 import mongoose, { Schema } from "mongoose";
 
 const rolesSchema = new mongoose.Schema({

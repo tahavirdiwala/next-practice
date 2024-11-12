@@ -4,6 +4,8 @@ import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import roleService from "../../_services/role.service";
 import { StatusCodes } from "http-status-codes";
 import commonDecorators from "../../_common";
+import { RoleInterFace } from "@/types/role";
+import { ReturnResponse } from "@/types/response";
 
 connectDb();
 const { responser } = commonDecorators;
@@ -17,7 +19,7 @@ async function POST(request: NextRequest) {
   }
 }
 
-async function GET() {
+async function GET(): ReturnResponse<RoleInterFace[]> {
   try {
     const roles = await roleService.getAll();
     return responser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
