@@ -14,11 +14,7 @@ const queryClient = new QueryClient({
 
 export const trpc = createTRPCReact<AppRouter>({});
 
-const ReactQueryClientProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const ReactQueryClientProvider = (props: { children: React.ReactNode }) => {
   const trpcClient = trpc.createClient({
     links: [
       httpBatchLink({
@@ -29,7 +25,9 @@ const ReactQueryClientProvider = ({
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {props.children}
+      </QueryClientProvider>
     </trpc.Provider>
   );
 };
