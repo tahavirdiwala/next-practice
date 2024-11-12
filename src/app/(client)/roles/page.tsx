@@ -1,12 +1,12 @@
-"use client";
-import { trpc } from "@/utils/providers/queryClientProvider";
-import RoleList from "./_components/roleList";
+import { Suspense } from "react";
+import RolesWrapper from "./_components/rolesWrapper";
 
 const Roles = () => {
-  const getRoles = trpc["get-roles"].useQuery(); // every type will automatically infer from backend due to trpc
-  return getRoles?.data?.data?.map((item) => (
-    <RoleList key={item._id} {...item} />
-  ));
+  return (
+    <Suspense fallback={"..loading"}>
+      <RolesWrapper />
+    </Suspense>
+  );
 };
 
 export default Roles;
