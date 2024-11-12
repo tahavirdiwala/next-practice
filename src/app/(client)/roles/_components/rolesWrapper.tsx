@@ -4,7 +4,7 @@ import React from "react";
 import RoleList from "./roleList";
 
 const RolesWrapper = () => {
-  const getRoles = trpc["get-roles"].useQuery(); // every type will automatically infer from backend due to trpc
+  const getRoles = trpc["get-roles"].useQuery();
   return getRoles?.data?.data?.map((item) => (
     <RoleList key={item._id} {...item} />
   ));
