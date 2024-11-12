@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.20",
+    "@trpc/client": "^11.0.0-rc.630",
+    "@trpc/next": "^11.0.0-rc.630",
+    "@trpc/react-query": "^11.0.0-rc.630",
+    "@trpc/server": "^11.0.0-rc.630",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
     "express": "^4.21.1",
@@ -17,7 +21,8 @@
     "mongoose": "^8.8.0",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028"
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
