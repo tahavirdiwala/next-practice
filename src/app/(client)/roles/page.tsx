@@ -1,13 +1,14 @@
-import { GET } from "@/app/(server)/api/roles/route";
-import React from "react";
+import { RoleInterFace } from "@/types/role";
 import RoleList from "./_components/roleList";
 
-const Roles = async () => {
-  const data = await (await GET()).json();
+const getRoles = async (): ReturnResponse<RoleInterFace[]> => {
+  const data = await fetch(`${process.env.CLIENT_URL}/roles`);
+  return data.json();
+};
 
-  return data?.data?.map((item: { _id: string; role: string }) => (
-    <RoleList key={item._id} {...item} />
-  ));
+const Roles = async () => {
+  const data = await getRoles();
+  return data?.data?.map((item) => <RoleList key={item._id} {...item} />);
 };
 
 export default Roles;
