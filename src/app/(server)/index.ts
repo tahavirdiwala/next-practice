@@ -11,16 +11,14 @@ const { trpcResponser } = commonDecorators;
 await connectDb();
 
 export const appRouter = router({
-  "get-roles": publicProcedure.query(
-    async (): GETTRPCResponse<RoleInterFace[]> => {
-      try {
-        const roles = await roleService.getAll();
-        return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
-      } catch (error) {
-        return trpcResponser(`${error}`, StatusCodes.BAD_REQUEST);
-      }
+  roles: publicProcedure.query(async (): GETTRPCResponse<RoleInterFace[]> => {
+    try {
+      const roles = await roleService.getAll();
+      return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
+    } catch (error) {
+      return trpcResponser(`${error}`, StatusCodes.BAD_REQUEST);
     }
-  ),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

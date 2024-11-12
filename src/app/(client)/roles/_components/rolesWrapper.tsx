@@ -4,7 +4,7 @@ import React from "react";
 import RoleList from "./roleList";
 
 const RolesWrapper = () => {
-  const getRoles = trpc["get-roles"].useQuery(void 0, {
+  const getRoles = trpc["roles"].useQuery(void 0, {
     gcTime: 0, // for removing default not cachetime
   });
 
