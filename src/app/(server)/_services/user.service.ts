@@ -1,9 +1,10 @@
+import { UserInterFace } from "@/interfaces/user";
 import Role from "@/models/role.model";
 import User from "@/models/user.model";
 import { NextRequest } from "next/server";
 
 class UserService {
-  add(request: NextRequest) {
+  add(request: NextRequest): Promise<UserInterFace> {
     return new Promise(async (resolve, reject) => {
       try {
         const body = await request.json();
@@ -24,7 +25,7 @@ class UserService {
     });
   }
 
-  getAll() {
+  getAll(): Promise<UserInterFace[]> {
     return new Promise((resolve, reject) => {
       User.find().then(resolve).catch(reject);
     });

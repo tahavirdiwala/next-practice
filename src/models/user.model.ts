@@ -1,3 +1,4 @@
+import { UserInterFace } from "@/interfaces/user";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -17,6 +18,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+const User =
+  mongoose.models.User<UserInterFace> ||
+  mongoose.model<UserInterFace>("User", userSchema);
 
 export default User;

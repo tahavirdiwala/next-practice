@@ -1,3 +1,4 @@
+import { RoleInterFace } from "@/interfaces/role";
 import mongoose, { Schema } from "mongoose";
 
 const rolesSchema = new mongoose.Schema({
@@ -17,6 +18,8 @@ const rolesSchema = new mongoose.Schema({
   ],
 });
 
-const Role = mongoose.models.Role || mongoose.model("Role", rolesSchema);
+const Role =
+  mongoose.models.Role<RoleInterFace> ||
+  mongoose.model<RoleInterFace>("Role", rolesSchema);
 
 export default Role;
