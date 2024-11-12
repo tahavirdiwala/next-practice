@@ -1,13 +1,11 @@
 import { RoleInterFace } from "@/types/role";
 import Role from "@/models/role.model";
-import { NextRequest } from "next/server";
 
 class RoleService {
-  add(request: NextRequest): Promise<RoleInterFace> {
+  add(request: RoleInterFace): Promise<RoleInterFace> {
     return new Promise(async (resolve, reject) => {
       try {
-        const body = await request.json();
-        Role.create(body).then(resolve).catch(reject);
+        Role.create(request).then(resolve).catch(reject);
       } catch (error) {
         reject(error);
       }

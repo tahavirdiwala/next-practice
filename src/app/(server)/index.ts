@@ -6,11 +6,20 @@ import roleService from "./_services/role.service";
 import connectDb from "@/dbConfig";
 import { RoleInterFace } from "@/types/role";
 import { GETTRPCResponse } from "@/types/response";
+import Role from "@/models/role.model";
 
 const { trpcResponser } = commonDecorators;
 await connectDb();
 
 export const appRouter = router({
+  "add-role": publicProcedure.input(Role).mutation(async (req)=> {
+    try{
+      await roleService.add(req.input as unknown as RoleInterFace);
+      return trpcResponser(MESSAGE.roles.add, StatusCodes.CREATED)
+    } catch(error) {
+      return trpcResponser(`${error}`, StatusCodes.BAD_REQUEST)
+    }
+  }),
   roles: publicProcedure.query(async (): GETTRPCResponse<RoleInterFace[]> => {
     try {
       const roles = await roleService.getAll();

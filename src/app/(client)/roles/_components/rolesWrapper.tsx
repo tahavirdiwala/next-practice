@@ -5,7 +5,7 @@ import RoleList from "./roleList";
 
 const RolesWrapper = () => {
   const getRoles = trpc.roles.useQuery(void 0, {
-    gcTime: 0, // for removing default not cachetime
+    gcTime: 0, // for removing default api cache
   });
 
   return getRoles?.data?.data?.map((item) => (
