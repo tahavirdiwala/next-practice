@@ -1,8 +1,15 @@
-import React from "react";
+"use client"
+import { trpc } from "@/utils/providers/queryClientProvider";
+import { use } from "react";
 
-const RoleById = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const temp = await params;
-  return <div>role by id - {temp.id}</div>;
+const RoleById =  ({ params }: { params: Promise<{ id: string }> }) => {
+ const temp = use(params);
+ const role = trpc.roles.get.useQuery({id: temp.id})
+  return <>
+  {
+    JSON.stringify(role?.data?.data, null)
+  }
+  </>
 };
 
 export default RoleById;

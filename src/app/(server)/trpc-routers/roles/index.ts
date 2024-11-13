@@ -31,9 +31,9 @@ export const rolesRouter = router({
   }),
   get: publicProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async (req) => {
+    .query(async (request): GETTRPCResponse<RoleInterFace> => {
       try {
-        const role = await roleService.get(req.input.id);
+        const role = await roleService.get(request.input.id);
         return trpcResponser(MESSAGE.roles.get, StatusCodes.OK, role);
       } catch (error) {
         return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);

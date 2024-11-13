@@ -22,6 +22,7 @@ function trpcFetchHandler(req: Request) {
     endpoint: "/api/trpc",
     req,
     router: appRouter,
+    // allowBatching: true,
     createContext: () => ({}),
   });
 }
