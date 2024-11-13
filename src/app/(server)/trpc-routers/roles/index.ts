@@ -7,6 +7,7 @@ import commonDecorators from "../../_common";
 import roleService from "../../_services/role.service";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import { publicProcedure, router } from "../../trpc";
+import { z } from "zod";
 
 const { trpcResponser } = commonDecorators;
 await connectDb();
@@ -20,16 +21,24 @@ export const rolesRouter = router({
       return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
     }
   }),
-  "get-roles": publicProcedure.query(
-    async (): GETTRPCResponse<RoleInterFace[]> => {
+  getall: publicProcedure.query(async (): GETTRPCResponse<RoleInterFace[]> => {
+    try {
+      const roles = await roleService.getAll();
+      return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
+    } catch (error) {
+      return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
+    }
+  }),
+  get: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async (req) => {
       try {
-        const roles = await roleService.getAll();
-        return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
+        const role = await roleService.get(req.input.id);
+        return trpcResponser(MESSAGE.roles.get, StatusCodes.OK, role);
       } catch (error) {
         return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
       }
-    }
-  ),
+    }),
 });
 
 export type AppRouter = typeof rolesRouter;

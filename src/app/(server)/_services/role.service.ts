@@ -15,6 +15,8 @@ class RoleService {
   }
 
   get(_id: string): Promise<RoleInterFace> {
+    console.log("_id", _id);
+
     return new Promise((resolve, reject) => {
       Role.findOne({ _id }).then(resolve).catch(reject);
     });
