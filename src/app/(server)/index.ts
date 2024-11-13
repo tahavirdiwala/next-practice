@@ -1,33 +1,8 @@
-import { StatusCodes } from "http-status-codes";
-import { RESPONSE_MESSAGE as MESSAGE } from "../lib/constant";
-import commonDecorators from "./_common";
-import { publicProcedure, router } from "./trpc";
-import roleService from "./_services/role.service";
-import connectDb from "@/dbConfig";
-import { RoleInterFace } from "@/types/role";
-import { GETTRPCResponse } from "@/types/response";
-import { RoleValidator } from "@/validators/role.validator";
-
-const { trpcResponser } = commonDecorators;
-await connectDb();
+import { router } from "./trpc";
+import { rolesRouter } from "./trpc-routers/roles";
 
 export const appRouter = router({
-  "add-role": publicProcedure.input(RoleValidator).mutation(async (req) => {
-    try {
-      await roleService.add(req.input);
-      return trpcResponser(MESSAGE.roles.add, StatusCodes.CREATED);
-    } catch (error) {
-      return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
-    }
-  }),
-  roles: publicProcedure.query(async (): GETTRPCResponse<RoleInterFace[]> => {
-    try {
-      const roles = await roleService.getAll();
-      return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
-    } catch (error) {
-      return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
-    }
-  }),
+  roles: rolesRouter,
 });
 
 export type AppRouter = typeof appRouter;

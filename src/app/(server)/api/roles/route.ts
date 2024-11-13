@@ -1,14 +1,14 @@
 import connectDb from "@/dbConfig";
-import { NextRequest } from "next/server";
 import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import roleService from "../../_services/role.service";
 import { StatusCodes } from "http-status-codes";
 import commonDecorators from "../../_common";
+import { RoleInterFace } from "@/types/role";
 
 connectDb();
 const { responser } = commonDecorators;
 
-async function POST(request: NextRequest) {
+async function POST(request: RoleInterFace) {
   try {
     await roleService.add(request);
     return responser(MESSAGE.roles.add, StatusCodes.CREATED);
