@@ -3,18 +3,14 @@ import Role from "@/models/role.model";
 
 class RoleService {
   add(request: RoleInterFace): Promise<RoleInterFace> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        Role.create(request).then(resolve).catch(reject);
-      } catch (error) {
-        reject(error);
-      }
+    return new Promise((resolve, reject) => {
+      Role.create(request).then(resolve).catch(reject);
     });
   }
 
   getAll(): Promise<RoleInterFace[]> {
     return new Promise((resolve, reject) => {
-      Role.find().then(resolve).catch(reject);
+      Role.find().populate("users").then(resolve).catch(reject);
     });
   }
 

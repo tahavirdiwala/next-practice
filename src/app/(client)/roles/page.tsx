@@ -3,7 +3,7 @@ import RolesWrapper from "./_components/rolesWrapper";
 
 const Roles = () => {
   return (
-    <Suspense fallback={"..loading"}>
+    <Suspense fallback={<p>Loading..</p>}>
       <RolesWrapper />
     </Suspense>
   );
