@@ -17,7 +17,7 @@ export const appRouter = router({
       await roleService.add(req.input);
       return trpcResponser(MESSAGE.roles.add, StatusCodes.CREATED);
     } catch (error) {
-      return trpcResponser(`${error}`, StatusCodes.BAD_REQUEST);
+      return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
     }
   }),
   roles: publicProcedure.query(async (): GETTRPCResponse<RoleInterFace[]> => {
@@ -25,7 +25,7 @@ export const appRouter = router({
       const roles = await roleService.getAll();
       return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
     } catch (error) {
-      return trpcResponser(`${error}`, StatusCodes.BAD_REQUEST);
+      return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
     }
   }),
 });
