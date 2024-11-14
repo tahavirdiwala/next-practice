@@ -1,11 +1,7 @@
-"use client";
-import { trpc } from "@/utils/providers/queryClientProvider";
-import { use } from "react";
+import GetRole from "../_components/role";
 
 const RoleById = ({ params }: { params: Promise<{ id: string }> }) => {
-  const temp = use(params);
-  const role = trpc.roles.get.useQuery({ id: temp.id });
-  return JSON.stringify(role?.data?.data);
+  return <GetRole params={params} />;
 };
 
 export default RoleById;
