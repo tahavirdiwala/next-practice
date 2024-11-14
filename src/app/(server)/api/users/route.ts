@@ -5,7 +5,7 @@ import userService from "../../_services/user.service";
 import { StatusCodes } from "http-status-codes";
 import commonDecorators from "../../_common";
 
-connectDb();
+await connectDb();
 const { responser } = commonDecorators;
 
 async function POST(request: NextRequest) {
