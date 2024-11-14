@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import { RoleInterFace } from "./role";
 
-interface UserInterFace {
+type UserInterFace= {
   _id?: string;
   name: string;
   email: string;
-  role: mongoose.Types.ObjectId & RoleInterFace;
+  role: RoleInterFace;
 }

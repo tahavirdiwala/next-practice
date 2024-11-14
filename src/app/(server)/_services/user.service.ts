@@ -3,7 +3,7 @@ import Role from "@/models/role.model";
 import User from "@/models/user.model";
 
 class UserService {
-  add(request: UserInterFace): Promise<UserInterFace> {
+  add(request: UserInterFace) {
     return new Promise(async (resolve, reject) => {
       try {
         const user = new User(request);
@@ -25,7 +25,7 @@ class UserService {
 
   getAll(): Promise<UserInterFace[]> {
     return new Promise((resolve, reject) => {
-      User.find().then(resolve).catch(reject);
+      User.find().populate("role").then(resolve).catch(reject);
     });
   }
 }
