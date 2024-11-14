@@ -3,8 +3,8 @@ import { rolesRouter } from "./trpc-routers/roles";
 import { userRouter } from "./trpc-routers/users";
 
 export const appRouter = router({
-  roles: rolesRouter,
-  users: userRouter,
+  role: rolesRouter,
+  user: userRouter,
 });
 
 export type AppRouter = typeof appRouter;

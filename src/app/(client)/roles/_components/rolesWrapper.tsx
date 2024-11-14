@@ -6,14 +6,14 @@ import RoleList from "./roleList";
 const RolesWrapper = () => {
   const queryClient = trpc.useUtils();
 
-  const getRoles = trpc.roles["getall"].useQuery(void 0, {
+  const getRoles = trpc.role["getall"].useQuery(void 0, {
     gcTime: 0, // for removing default api cache
     suspense: true,
   });
 
-  const addRole = trpc.roles["add-role"].useMutation({
+  const addRole = trpc.role["add-role"].useMutation({
     onSuccess() {
-      queryClient.roles["getall"].invalidate();
+      queryClient.role["getall"].invalidate();
     },
   });
 

@@ -4,7 +4,7 @@ import { use } from "react";
 
 const GetRole = (props: { params: Promise<{ id: string }> }) => {
   const temp = use(props.params);
-  const role = trpc.roles.get.useQuery({ id: temp.id }, { suspense: true });
+  const role = trpc.role.get.useQuery({ id: temp.id }, { suspense: true });
   return JSON.stringify(role?.data?.data);
 };
 

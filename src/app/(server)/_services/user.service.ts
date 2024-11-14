@@ -1,16 +1,14 @@
 import { UserInterFace } from "@/types/user";
 import Role from "@/models/role.model";
 import User from "@/models/user.model";
-import { NextRequest } from "next/server";
 
 class UserService {
-  add(request: NextRequest): Promise<UserInterFace> {
+  add(request: UserInterFace): Promise<UserInterFace> {
     return new Promise(async (resolve, reject) => {
       try {
-        const body = await request.json();
-        const user = new User(body);
+        const user = new User(request);
 
-        const role = await Role.findOne({ _id: body.role });
+        const role = await Role.findOne({ _id: request.role });
 
         if (role) {
           role.users.push(user._id);
