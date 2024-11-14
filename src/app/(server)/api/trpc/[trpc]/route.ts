@@ -2,7 +2,7 @@ import { appRouter } from "@/app/(server)";
 import connectDb from "@/dbConfig";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
-function fetchHandler(req: Request) {
+function handler(req: Request) {
   return fetchRequestHandler({
     endpoint: "/api/trpc",
     req,
@@ -11,9 +11,4 @@ function fetchHandler(req: Request) {
   });
 }
 
-export {
-  fetchHandler as POST,
-  fetchHandler as GET,
-  fetchHandler as PUT,
-  fetchHandler as DELETE,
-};
+export { handler as POST, handler as GET, handler as PUT, handler as DELETE };
