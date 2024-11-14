@@ -11,7 +11,7 @@ const RolesWrapper = () => {
     suspense: true,
   });
 
-  const addRole = trpc.role["add-role"].useMutation({
+  const addRole = trpc.role.add.useMutation({
     onSuccess() {
       queryClient.role.getall.invalidate();
     },

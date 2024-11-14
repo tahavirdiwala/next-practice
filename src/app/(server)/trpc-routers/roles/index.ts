@@ -11,7 +11,7 @@ import { z } from "zod";
 const { trpcResponser } = commonDecorators;
 
 export const rolesRouter = router({
-  "add-role": publicProcedure.input(RoleValidator).mutation(async (req) => {
+  add: publicProcedure.input(RoleValidator).mutation(async (req) => {
     try {
       await roleService.add(req.input);
       return trpcResponser(MESSAGE.roles.add, StatusCodes.CREATED);
