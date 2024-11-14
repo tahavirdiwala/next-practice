@@ -18,7 +18,7 @@ const ReactQueryClientProvider = (props: { children: React.ReactNode }) => {
   const trpcClient = trpc.createClient({
     links: [
       httpBatchLink({
-        url: `${process.env.CLIENT_URL}/trpc`,
+        url: `http://localhost:3000/api/trpc`,
       }),
     ],
   });
