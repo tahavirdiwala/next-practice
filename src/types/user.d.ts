@@ -4,5 +4,5 @@ interface UserInterFace {
   _id?: string;
   name: string;
   email: string;
-  role: mongoose.Types.ObjectId;
+  role: mongoose.Types.ObjectId & RoleInterFace;
 }
