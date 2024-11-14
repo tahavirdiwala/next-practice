@@ -1,4 +1,5 @@
 import { appRouter } from "@/app/(server)";
+import connectDb from "@/dbConfig";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 async function POST(req: Request) {
@@ -22,8 +23,10 @@ function trpcFetchHandler(req: Request) {
     endpoint: "/api/trpc",
     req,
     router: appRouter,
+    createContext: async () => {
+      await connectDb();
+    },
     // allowBatching: true,
-    createContext: () => ({}),
   });
 }
 

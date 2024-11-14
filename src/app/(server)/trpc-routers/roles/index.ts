@@ -1,5 +1,4 @@
 import { StatusCodes } from "http-status-codes";
-import connectDb from "@/dbConfig";
 import { RoleInterFace } from "@/types/role";
 import { GETTRPCResponse } from "@/types/response";
 import { RoleValidator } from "@/validators/role.validator";
@@ -10,7 +9,6 @@ import { publicProcedure, router } from "../../trpc";
 import { z } from "zod";
 
 const { trpcResponser } = commonDecorators;
-await connectDb();
 
 export const rolesRouter = router({
   "add-role": publicProcedure.input(RoleValidator).mutation(async (req) => {
