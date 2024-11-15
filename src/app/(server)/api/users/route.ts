@@ -10,7 +10,8 @@ const { responser } = commonDecorators;
 
 async function POST(request: NextRequest) {
   try {
-    await userService.add(request);
+    // await userService.add(request);
+    await userService.add();
     return responser(MESSAGE.users.add, StatusCodes.CREATED);
   } catch (error) {
     return responser(`${error}`, StatusCodes.BAD_REQUEST);

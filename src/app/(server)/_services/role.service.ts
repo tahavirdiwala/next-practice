@@ -1,9 +1,15 @@
 import Role from "@/models/role.model";
+import { NextRequest } from "next/server";
 
 class RoleService {
-  add(request: RoleType): Promise<RoleType> {
-    return new Promise((resolve, reject) => {
-      Role.create(request).then(resolve).catch(reject);
+  add(request: NextRequest): Promise<RoleType> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const payload = await request.json();
+        Role.create(payload).then(resolve).catch(reject);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

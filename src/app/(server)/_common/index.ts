@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 class CommonDecorators {
-  responser<T>(message: string, statusCode: number, data?: T) {
+  responser<T>(message: string | Error, statusCode: number, data?: T) {
     return NextResponse.json({ message, statusCode, data });
   }
 }
