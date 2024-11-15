@@ -4,9 +4,9 @@ import React from "react";
 
 const User = (props: UserType) => {
   return (
-    <React.Fragment>
+    <li>
       {props.name} - has role of {props.role.role}
-    </React.Fragment>
+    </li>
   );
 };
 
