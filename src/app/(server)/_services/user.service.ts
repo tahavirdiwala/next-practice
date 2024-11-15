@@ -1,9 +1,9 @@
-import { UserInterFace } from "@/types/user";
+import { UserType } from "@/types/user";
 import Role from "@/models/role.model";
 import User from "@/models/user.model";
 
 class UserService {
-  add(request: UserInterFace) {
+  add(request: UserType<"add">) {
     return new Promise(async (resolve, reject) => {
       try {
         const user = new User(request);
@@ -23,7 +23,7 @@ class UserService {
     });
   }
 
-  getAll(): Promise<UserInterFace[]> {
+  getAll(): Promise<UserType[]> {
     return new Promise((resolve, reject) => {
       User.find()
         .populate({

@@ -1,8 +1,8 @@
-import { RoleInterFace } from "./role";
+import { RoleType } from "./role";
 
-type UserInterFace = {
+type UserType<T = unknown> = {
   _id?: string;
   name: string;
   email: string;
-  role: RoleInterFace;
+  role: T extends "add" ? string : RoleType;
 };

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { z } from "zod";
-import { UserInterFace } from "@/types/user";
+import { UserType } from "@/types/user";
 
 const RoleValidator = z.object({
   _id: z.string().optional(),
@@ -8,7 +8,7 @@ const RoleValidator = z.object({
   description: z.string().optional(),
   users: z
     .intersection(
-      z.instanceof(Array<UserInterFace>),
+      z.instanceof(Array<UserType>),
       z.instanceof(Array<mongoose.Types.ObjectId>)
     )
     .optional(),

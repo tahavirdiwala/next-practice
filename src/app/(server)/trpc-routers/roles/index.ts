@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { RoleInterFace } from "@/types/role";
+import { RoleType } from "@/types/role";
 import { GETTRPCResponse } from "@/types/response";
 import { RoleValidator } from "@/validators/role.validator";
 import commonDecorators from "../../_common";
@@ -19,7 +19,7 @@ export const rolesRouter = router({
       return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
     }
   }),
-  getall: publicProcedure.query(async (): GETTRPCResponse<RoleInterFace[]> => {
+  getall: publicProcedure.query(async (): GETTRPCResponse<RoleType[]> => {
     try {
       const roles = await roleService.getAll();
       return trpcResponser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
@@ -29,7 +29,7 @@ export const rolesRouter = router({
   }),
   get: publicProcedure
     .input(z.object({ id: z.string() }))
-    .query(async (request): GETTRPCResponse<RoleInterFace> => {
+    .query(async (request): GETTRPCResponse<RoleType> => {
       try {
         const role = await roleService.get(request.input.id);
         return trpcResponser(MESSAGE.roles.get, StatusCodes.OK, role);
