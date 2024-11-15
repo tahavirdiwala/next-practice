@@ -1,28 +1,21 @@
+import { RoleType } from "@/types/role";
 import mongoose from "mongoose";
-import UserRole from "./userRoles.model";
 
-const rolesSchema = new mongoose.Schema(
-  {
-    role: {
-      type: String,
-      index: true,
-      required: true,
-    },
-    description: {
-      type: String,
-    },
+const rolesSchema = new mongoose.Schema({
+  role: {
+    type: String,
+    index: true,
+    required: true,
   },
-  {
-    timestamps: true,
-  }
-);
-
-rolesSchema.post("save", async function (doc) {
-  try {
-    await UserRole.create({ roleId: doc._id });
-  } catch (error) {
-    console.log(error);
-  }
+  description: {
+    type: String,
+  },
+  users: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Role =

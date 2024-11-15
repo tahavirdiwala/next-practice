@@ -1,5 +1,5 @@
+import { UserType } from "@/types/user";
 import mongoose from "mongoose";
-import UserRole from "./userRoles.model";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -12,18 +12,9 @@ const userSchema = new mongoose.Schema({
   },
   roleId: {
     type: mongoose.Schema.ObjectId,
+    ref: "Role",
     index: true,
   },
-});
-
-userSchema.post("save", async function (doc: any) {
-  try {
-    const userRole: any = await UserRole.findOne({ roleId: doc?.roleId });
-    userRole?.userId?.push(doc?.id);
-    await userRole?.save();
-  } catch (error) {
-    console.log(error);
-  }
 });
 
 const User =
