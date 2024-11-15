@@ -1,8 +1,8 @@
 import { RoleInterFace } from "./role";
 
-type UserInterFace= {
+type UserInterFace = {
   _id?: string;
   name: string;
   email: string;
   role: RoleInterFace;
-}
+};
