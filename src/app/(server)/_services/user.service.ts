@@ -25,7 +25,16 @@ class UserService {
 
   getAll(): Promise<UserInterFace[]> {
     return new Promise((resolve, reject) => {
-      User.find().populate("role").then(resolve).catch(reject);
+      User.find()
+        .populate({
+          path: "role",
+          populate: {
+            path: "users",
+            model: "User",
+          },
+        })
+        .then(resolve)
+        .catch(reject);
     });
   }
 }

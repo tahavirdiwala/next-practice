@@ -1,7 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
+import UserList from "./_components/userList";
 
 const Users = () => {
-  return <></>;
+  return (
+    <Suspense fallback={"loading.."}>
+      <UserList />
+    </Suspense>
+  );
 };
 
 export default Users;
