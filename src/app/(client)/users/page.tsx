@@ -1,14 +1,9 @@
-import React, { Suspense } from "react";
-import UserList from "./_components/userList";
+import React from "react";
 
 export const dynamic = "force-dynamic";
 
 const Users = () => {
-  return (
-    <Suspense fallback={"loading.."}>
-      <UserList />
-    </Suspense>
-  );
+  return <></>;
 };
 
 export default Users;

@@ -1,4 +1,3 @@
-import { RoleType } from "@/types/role";
 import Role from "@/models/role.model";
 
 class RoleService {
@@ -10,7 +9,7 @@ class RoleService {
 
   getAll(): Promise<RoleType[]> {
     return new Promise((resolve, reject) => {
-      Role.find().populate("users").then(resolve).catch(reject);
+      Role.find().then(resolve).catch(reject);
     });
   }
 

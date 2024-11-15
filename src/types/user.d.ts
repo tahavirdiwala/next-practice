@@ -1,8 +1,5 @@
-import { RoleType } from "./role";
-
-type UserType<T = unknown> = {
+type UserType = {
   _id?: string;
   name: string;
   email: string;
-  role: T extends "add" ? string : RoleType;
 };

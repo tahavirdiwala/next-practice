@@ -1,22 +1,22 @@
-import { UserType } from "@/types/user";
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    index: true,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      index: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    index: true,
-  },
-  role: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Role",
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const User =
   mongoose.models.User<UserType> ||

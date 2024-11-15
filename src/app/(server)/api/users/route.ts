@@ -3,18 +3,19 @@ import { RESPONSE_MESSAGE as MESSAGE } from "@/app/lib/constant";
 import userService from "../../_services/user.service";
 import { StatusCodes } from "http-status-codes";
 import commonDecorators from "../../_common";
+import { NextRequest } from "next/server";
 
 await connectDb();
 const { responser } = commonDecorators;
 
-// async function POST(request: NextRequest) {
-//   try {
-//     await userService.add(request);
-//     return responser(MESSAGE.users.add, StatusCodes.CREATED);
-//   } catch (error) {
-//     return responser(`${error}`, StatusCodes.BAD_REQUEST);
-//   }
-// }
+async function POST(request: NextRequest) {
+  try {
+    await userService.add(request);
+    return responser(MESSAGE.users.add, StatusCodes.CREATED);
+  } catch (error) {
+    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+  }
+}
 
 async function GET() {
   try {
@@ -25,4 +26,4 @@ async function GET() {
   }
 }
 
-export { GET };
+export { POST, GET };

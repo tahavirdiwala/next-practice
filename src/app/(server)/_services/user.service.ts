@@ -1,23 +1,11 @@
-import { UserType } from "@/types/user";
-import Role from "@/models/role.model";
 import User from "@/models/user.model";
-import { ObjectId } from "mongoose";
+import { NextRequest } from "next/server";
 
 class UserService {
-  add(request: UserType<"add">) {
+  add(request: NextRequest) {
     return new Promise(async (resolve, reject) => {
+      console.log("request", request);
       try {
-        const user = new User(request);
-
-        const role = await Role.findOne({ _id: request.role });
-
-        if (role) {
-          role.users.push(user._id);
-          await role.save();
-        } else {
-          reject("Role does not exist");
-        }
-        user.save().then(resolve).catch(reject);
       } catch (error) {
         reject(error);
       }
@@ -26,45 +14,7 @@ class UserService {
 
   getAll(): Promise<UserType[]> {
     return new Promise((resolve, reject) => {
-      User.find()
-        .populate({
-          path: "role",
-          populate: {
-            path: "users",
-            model: "User",
-          },
-        })
-        .then(resolve)
-        .catch(reject);
-    });
-  }
-
-  delete(_id: string) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const role = await Role.findOne({ users: _id });
-
-        const tempUsersByRole = [...role.users];
-        const userId = tempUsersByRole.findIndex(
-          (item: ObjectId) => item?.toString() === _id
-        );
-
-        tempUsersByRole.splice(userId, 1);
-        role.users = tempUsersByRole;
-
-        User.findByIdAndDelete({ _id })
-          .then(async (response) => {
-            if (Object.keys(response || {}).length > 0) {
-              await role.save();
-              resolve(true);
-            } else {
-              reject(`User with given id does not exist`);
-            }
-          })
-          .catch(reject);
-      } catch (error) {
-        reject(error);
-      }
+      User.find().then(resolve).catch(reject);
     });
   }
 }
