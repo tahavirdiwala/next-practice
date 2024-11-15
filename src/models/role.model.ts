@@ -17,11 +17,11 @@ const rolesSchema = new mongoose.Schema(
   }
 );
 
-rolesSchema.post("save", async function (doc) {
+rolesSchema.pre("save", async function (next) {
   try {
-    await UserRole.create({ roleId: doc._id });
+    await UserRole.create({ roleId: this._id });
   } catch (error) {
-    console.log(error);
+    next(error as undefined);
   }
 });
 

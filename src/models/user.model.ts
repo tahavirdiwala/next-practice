@@ -16,13 +16,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.post("save", async function (doc: any) {
+userSchema.pre("save", async function (next) {
   try {
-    const userRole: any = await UserRole.findOne({ roleId: doc?.roleId });
-    userRole?.userId?.push(doc?.id);
-    await userRole?.save();
+      const userRole = await UserRole.findOne({ roleId: this?.roleId });
+      
+        userRole?.userId?.push(this?._id);
+        await userRole?.save();
   } catch (error) {
-    console.log(error);
   }
 });
 

@@ -3,15 +3,14 @@ import mongoose, { Schema } from "mongoose";
 
 const userRolesSchema = new mongoose.Schema(
   {
-    userId: [
-      {
-        type: Schema.Types.ObjectId,
-        index: true,
-        default: [],
-      },
-    ],
+    userId: [{
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      index: true,
+    }],
     roleId: {
       type: Schema.Types.ObjectId,
+      ref: "Role",
       index: true,
     },
   },
