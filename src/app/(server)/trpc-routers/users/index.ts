@@ -33,4 +33,14 @@ export const userRouter = router({
       return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
     }
   }),
+  delete: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async (request) => {
+      try {
+        await userService.delete(request.input.id);
+        return trpcResponser(MESSAGE.users.delete, StatusCodes.OK);
+      } catch (error) {
+        return trpcResponser(error as Error, StatusCodes.BAD_REQUEST);
+      }
+    }),
 });

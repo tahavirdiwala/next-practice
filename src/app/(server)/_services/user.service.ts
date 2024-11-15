@@ -37,6 +37,19 @@ class UserService {
         .catch(reject);
     });
   }
+  delete(_id: string) {
+    return new Promise((resolve, reject) => {
+      User.findByIdAndDelete({ _id })
+        .then((response) => {
+          if (Object.keys(response || {}).length > 0) {
+            resolve(true);
+          } else {
+            reject(`User with given id does not exist`);
+          }
+        })
+        .catch(reject);
+    });
+  }
 }
 
 const userService = new UserService();
