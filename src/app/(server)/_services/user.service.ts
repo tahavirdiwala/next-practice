@@ -44,13 +44,13 @@ class UserService {
       try {
         const role = await Role.findOne({ users: _id });
 
-        const tempUsersForRole = [...role.users];
-        const idx = tempUsersForRole.findIndex((item: ObjectId) => {
-          return item?.toString() === _id;
-        });
+        const tempUsersByRole = [...role.users];
+        const userId = tempUsersByRole.findIndex(
+          (item: ObjectId) => item?.toString() === _id
+        );
 
-        tempUsersForRole.splice(idx, 1);
-        role.users = tempUsersForRole;
+        tempUsersByRole.splice(userId, 1);
+        role.users = tempUsersByRole;
 
         User.findByIdAndDelete({ _id })
           .then(async (response) => {
