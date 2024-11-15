@@ -1,6 +1,7 @@
 import { UserType } from "@/types/user";
 import Role from "@/models/role.model";
 import User from "@/models/user.model";
+import { ObjectId } from "mongoose";
 
 class UserService {
   add(request: UserType<"add">) {
@@ -37,17 +38,33 @@ class UserService {
         .catch(reject);
     });
   }
+
   delete(_id: string) {
-    return new Promise((resolve, reject) => {
-      User.findByIdAndDelete({ _id })
-        .then((response) => {
-          if (Object.keys(response || {}).length > 0) {
-            resolve(true);
-          } else {
-            reject(`User with given id does not exist`);
-          }
-        })
-        .catch(reject);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const role = await Role.findOne({ users: _id });
+
+        const tempUsersForRole = [...role.users];
+        const idx = tempUsersForRole.findIndex((item: ObjectId) => {
+          return item?.toString() === _id;
+        });
+
+        tempUsersForRole.splice(idx, 1);
+        role.users = tempUsersForRole;
+
+        User.findByIdAndDelete({ _id })
+          .then(async (response) => {
+            if (Object.keys(response || {}).length > 0) {
+              await role.save();
+              resolve(true);
+            } else {
+              reject(`User with given id does not exist`);
+            }
+          })
+          .catch(reject);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }
