@@ -2,6 +2,7 @@ const RESPONSE_MESSAGE = {
   users: {
     add: "User Created SuccessFully",
     getAll: "Users Fetched SuccessFully",
+    edit: "User Updated SuccessFully",
     delete: "User Deleted SuccessFully",
   },
   roles: {

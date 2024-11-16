@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import UserRole from "./userRoles.model";
 
 const rolesSchema = new mongoose.Schema(
   {
@@ -12,18 +11,15 @@ const rolesSchema = new mongoose.Schema(
       type: String,
     },
   },
-  {
-    timestamps: true,
-  }
 );
 
-rolesSchema.pre("save", async function (next) {
-  try {
-    await UserRole.create({ roleId: this._id });
-  } catch (error) {
-    next(error as undefined);
-  }
-});
+// rolesSchema.pre("save", async function (next) {
+//   try {
+//     await UserRole.create({ roleId: this._id });
+//   } catch (error) {
+//     next(error as undefined);
+//   }
+// });
 
 const Role =
   mongoose.models.Role<RoleType> ||

@@ -10,11 +10,10 @@ const { responser } = commonDecorators;
 
 async function POST(request: NextRequest) {
   try {
-    // await userService.add(request);
-    await userService.add();
+    await userService.add(request);
     return responser(MESSAGE.users.add, StatusCodes.CREATED);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 
@@ -23,8 +22,18 @@ async function GET() {
     const users = await userService.getAll();
     return responser(MESSAGE.users.getAll, StatusCodes.OK, users);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 
-export { POST, GET };
+async function PUT() {
+  try {
+    // await userService.edit(request);
+    await userService.edit();
+    return responser(MESSAGE.users.edit, StatusCodes.OK);
+  } catch (error) {
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
+  }
+}
+
+export { POST, GET, PUT };

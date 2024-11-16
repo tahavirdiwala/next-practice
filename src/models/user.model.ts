@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import UserRole from "./userRoles.model";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -10,20 +9,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     index: true,
   },
-  roleId: {
-    type: mongoose.Schema.ObjectId,
-    index: true,
-  },
-});
-
-userSchema.pre("save", async function (next) {
-  try {
-      const userRole = await UserRole.findOne({ roleId: this?.roleId });
-      
-        userRole?.userId?.push(this?._id);
-        await userRole?.save();
-  } catch (error) {
-  }
 });
 
 const User =
