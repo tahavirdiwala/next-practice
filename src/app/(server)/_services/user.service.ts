@@ -67,7 +67,6 @@ class UserService {
   edit() {
     return new Promise(async (resolve, reject) => {
       try {
-        console.time("time taken");
         const batchSize = 1000; 
         const total = 100000;
         
@@ -83,7 +82,6 @@ class UserService {
           }
           await Promise.allSettled(batchPromises);
         }
-        console.timeEnd("time taken");
         resolve("Insertion completed");
       } catch (error) {
         reject(error);
