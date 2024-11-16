@@ -4,5 +4,5 @@ type UserType = {
   _id?: string;
   name: string;
   email: string;
-  roleId: mongoose.Types.ObjectId;
+  roleId: mongoose.Types.ObjectId[];
 };

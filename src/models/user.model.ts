@@ -10,11 +10,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     index: true,
   },
-  roleId: {
+  roleId: [{
     type: mongoose.Schema.ObjectId,
     ref: "Role",
     index: true,
-  },
+  }],
 });
 
 const User =
