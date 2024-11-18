@@ -24,8 +24,8 @@ class UserService {
   getAll(request: NextRequest): Promise<UserType[]> {
     const searchParams = request.nextUrl.searchParams;
 
-    const page = Number(searchParams.get("page"));
-    const limit = Number(searchParams.get("limit"));
+    const userDetailsPage = Number(searchParams.get("page"));
+    const userDetailsLimit = Number(searchParams.get("limit"));
 
     return new Promise((resolve, reject) => {
       try {
@@ -38,10 +38,10 @@ class UserService {
               as: "userDetails",
               pipeline: [
                 {
-                  $skip: (page - 1) * limit,
+                  $skip: (userDetailsPage - 1) * userDetailsLimit,
                 },
                 {
-                  $limit: limit,
+                  $limit: userDetailsLimit,
                 },
               ],
             },
