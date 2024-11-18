@@ -1,4 +1,5 @@
 import User from "@/models/user.model";
+// import UserDetail from "@/models/userDetail.model";
 import { UserType } from "@/types/user";
 
 class UserService {
@@ -57,6 +58,7 @@ class UserService {
         .populate(["roleId", "userDetails"])
         .then(resolve)
         .catch(reject);
+      // UserDetail.find().then(resolve).catch(reject);
     });
   }
 }
