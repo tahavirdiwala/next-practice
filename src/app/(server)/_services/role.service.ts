@@ -1,4 +1,5 @@
 import Role from "@/models/role.model";
+import { RoleType } from "@/types/role";
 import { NextRequest } from "next/server";
 
 class RoleService {
