@@ -4,10 +4,6 @@ type UserDetailType = {
   userId: mongoose.Types.ObjectId;
   state: string;
   city: string;
-  address: [
-    {
-      name: string;
-    }
-  ];
+  address: UserAddress[];
   designation: string;
 };
