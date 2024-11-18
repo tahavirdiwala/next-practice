@@ -1,5 +1,5 @@
-import { UserType } from "@/types/user";
 import mongoose from "mongoose";
+import { UserType } from "@/types/user";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -10,11 +10,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     index: true,
   },
-  roleId: [{
-    type: mongoose.Schema.ObjectId,
-    ref: "Role",
-    index: true,
-  }],
+  roleId: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Role",
+      index: true,
+    },
+  ],
+  userDetails: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "UserDetail",
+      index: true,
+    },
+  ],
 });
 
 const User =
