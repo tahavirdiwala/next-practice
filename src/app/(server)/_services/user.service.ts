@@ -21,7 +21,12 @@ class UserService {
     });
   }
 
-  getAll(): Promise<UserType[]> {
+  getAll(request: NextRequest): Promise<UserType[]> {
+    const searchParams = request.nextUrl.searchParams;
+
+    const page = Number(searchParams.get("page"));
+    const limit = Number(searchParams.get("limit"));
+
     return new Promise((resolve, reject) => {
       try {
         User.aggregate([
@@ -31,6 +36,14 @@ class UserService {
               localField: "_id",
               foreignField: "userId",
               as: "userDetails",
+              pipeline: [
+                {
+                  $skip: (page - 1) * limit,
+                },
+                {
+                  $limit: limit,
+                },
+              ],
             },
           },
           {
