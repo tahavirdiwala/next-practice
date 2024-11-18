@@ -17,7 +17,7 @@ async function GET(
     const role = await roleService.get(ctx.id);
     return responser(MESSAGE.roles.get, StatusCodes.OK, role);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 

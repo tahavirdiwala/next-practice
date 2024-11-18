@@ -13,7 +13,7 @@ async function POST(request: NextRequest) {
     await roleService.add(request);
     return responser(MESSAGE.roles.add, StatusCodes.CREATED);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 
@@ -22,7 +22,7 @@ async function GET() {
     const roles = await roleService.getAll();
     return responser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 
