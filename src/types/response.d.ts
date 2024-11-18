@@ -7,9 +7,3 @@ type GETResponse<T> = Promise<
     data?: T;
   }>
 >;
-
-type GETTRPCResponse<T> = Promise<{
-  message: string | Error;
-  statusCode: number;
-  data?: T;
-}>;
