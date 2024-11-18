@@ -67,7 +67,6 @@ class UserService {
         //   }
         //   await Promise.allSettled(batchPromises);
         // }
-        // resolve("Insertion completed");
         // UserDetail.updateMany(
         //   {},
         //   {
