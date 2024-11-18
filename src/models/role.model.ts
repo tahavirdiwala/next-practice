@@ -1,25 +1,15 @@
 import mongoose from "mongoose";
 
-const rolesSchema = new mongoose.Schema(
-  {
-    role: {
-      type: String,
-      index: true,
-      required: true,
-    },
-    description: {
-      type: String,
-    },
+const rolesSchema = new mongoose.Schema({
+  role: {
+    type: String,
+    index: true,
+    required: true,
   },
-);
-
-// rolesSchema.pre("save", async function (next) {
-//   try {
-//     await UserRole.create({ roleId: this._id });
-//   } catch (error) {
-//     next(error as undefined);
-//   }
-// });
+  description: {
+    type: String,
+  },
+});
 
 const Role =
   mongoose.models.Role<RoleType> ||
