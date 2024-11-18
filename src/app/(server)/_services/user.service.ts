@@ -1,4 +1,5 @@
 import User from "@/models/user.model";
+import UserDetail from "@/models/userDetail.model";
 import UserRole from "@/models/userRoles.model";
 import { NextRequest } from "next/server";
 
@@ -14,7 +15,6 @@ class UserService {
               .catch(reject);
           })
           .catch(reject);
-
       } catch (error) {
         reject(error);
       }
@@ -22,73 +22,76 @@ class UserService {
   }
 
   getAll(): Promise<UserType[]> {
-    return new Promise( (resolve, reject) => {
-      User.aggregate([
-        {
-          $lookup: {
-            from: "userroles",
-            localField: "_id",
-            foreignField: "userId",
-            as: "userRoles"
-          } 
-        }, {
-          $unwind: {
-            path: "$userRoles",
-            preserveNullAndEmptyArrays: true, 
-          },
-        },
-        {
-          $lookup: {
-            from: "roles",
-            localField: "userRoles.roleId",
-            foreignField: "_id",
-            as: "roleDetails",
-          },
-        },
-        {
-          $group: {
-            _id: "$_id",
-            name: { $first: "$name" },
-            email: { $first: "$email" },
-            userRoles: { $push: "$userRoles" },
-            roles: { $push: { $arrayElemAt: ["$roleDetails", 0] } },
-          },
-        }, {
-          $project: {
-            name:1,
-            email:1,
-            "roles":1
-          }
-        }
-      ]).then(resolve).catch(reject)
-    })
-  }
-
-  edit() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       try {
-        const batchSize = 1000; 
-        const total = 100000;
-        
-        for (let i = 0; i < total; i += batchSize) {
-          const batchPromises = [];
-          for (let j = 0; j < batchSize && i + j < total; j++) {
-            batchPromises.push(
-              UserRole.create({
-                userId: "673807121d1f346d91557143",
-                roleId: "6737773170f15091b7fc47de",
-              })
-            );
-          }
-          await Promise.allSettled(batchPromises);
-        }
-        resolve("Insertion completed");
+        User.aggregate([
+          {
+            $lookup: {
+              from: "userdetails",
+              localField: "_id",
+              foreignField: "userId",
+              as: "userDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "useraddresses",
+              localField: "userDetails.address",
+              foreignField: "_id",
+              as: "userAddress",
+            },
+          },
+        ])
+          .then(resolve)
+          .catch(reject);
       } catch (error) {
         reject(error);
       }
     });
   }
-  
+
+  edit() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // const batchSize = 1000;
+        // const total = 100000;
+        // for (let i = 0; i < total; i += batchSize) {
+        //   const batchPromises = [];
+        //   for (let j = 0; j < batchSize && i + j < total; j++) {
+        //     batchPromises.push(
+        //       UserRole.create({
+        //         userId: "673807121d1f346d91557143",
+        //         roleId: "6737773170f15091b7fc47de",
+        //       })
+        //     );
+        //   }
+        //   await Promise.allSettled(batchPromises);
+        // }
+        // resolve("Insertion completed");
+        // UserDetail.updateMany(
+        //   {},
+        //   {
+        //     userId: "673807121d1f346d91557143",
+        //   }
+        // )
+        //   .then(resolve)
+        //   .catch(reject);
+
+        UserDetail.updateMany(
+          { userId: "673807121d1f346d91557143" },
+          {
+            $set: {
+              address: ["673af319cc131bfeaecea904"],
+            },
+          }
+        )
+          .then(resolve)
+          .catch(reject);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }
 
 const userService = new UserService();
