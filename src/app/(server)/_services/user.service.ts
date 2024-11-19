@@ -1,3 +1,4 @@
+import { DefaultPagination as Pagination } from "@/app/lib/constant";
 import User from "@/models/user.model";
 import UserDetail from "@/models/userDetail.model";
 import UserRole from "@/models/userRoles.model";
@@ -24,26 +25,43 @@ class UserService {
   getAll(request: NextRequest): Promise<UserType[]> {
     const searchParams = request.nextUrl.searchParams;
 
-    const userDetailsPage = Number(searchParams.get("page"));
-    const userDetailsLimit = Number(searchParams.get("limit"));
+    const userDetailsPage = Number(searchParams.get("page")) || Pagination.page;
+    const userDetailsLimit =
+      Number(searchParams.get("limit")) || Pagination.limit;
 
     return new Promise((resolve, reject) => {
       try {
         User.aggregate([
           {
             $lookup: {
+              from: "userroles",
+              localField: "_id",
+              foreignField: "userId",
+              as: "userRoles",
+            },
+          },
+          {
+            $lookup: {
+              from: "roles",
+              localField: "userRoles.roleId",
+              foreignField: "_id",
+              as: "userRoles",
+            },
+          },
+          {
+            $lookup: {
               from: "userdetails",
               localField: "_id",
               foreignField: "userId",
               as: "userDetails",
-              pipeline: [
-                {
-                  $skip: (userDetailsPage - 1) * userDetailsLimit,
-                },
-                {
-                  $limit: userDetailsLimit,
-                },
-              ],
+              // pipeline: [
+              //   {
+              //     $skip: (userDetailsPage - 1) * userDetailsLimit,
+              //   },
+              //   {
+              //     $limit: userDetailsLimit,
+              //   },
+              // ],
             },
           },
           {
@@ -51,7 +69,7 @@ class UserService {
               from: "useraddresses",
               localField: "userDetails.address",
               foreignField: "_id",
-              as: "userAddress",
+              as: "userAddresses",
             },
           },
         ])

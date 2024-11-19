@@ -1,3 +1,8 @@
+enum DefaultPagination {
+  page = 1,
+  limit = 100,
+}
+
 const RESPONSE_MESSAGE = {
   users: {
     add: "User Created SuccessFully",
@@ -12,4 +17,4 @@ const RESPONSE_MESSAGE = {
   },
 };
 
-export { RESPONSE_MESSAGE };
+export { DefaultPagination, RESPONSE_MESSAGE };
