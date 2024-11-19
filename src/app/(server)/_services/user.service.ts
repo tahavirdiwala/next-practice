@@ -94,7 +94,6 @@ class UserService {
         //     roleId: "673c7c9b7822e57df8a48a1c",
         //   },
         // ];
-
         // UserRole.insertMany(tempArray).then(resolve).catch(reject);
       } catch (error) {
         reject(error);
