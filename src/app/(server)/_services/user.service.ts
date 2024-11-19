@@ -1,5 +1,4 @@
 import User from "@/models/user.model";
-// import UserDetail from "@/models/userDetail.model";
 import { UserType } from "@/types/user";
 
 class UserService {
@@ -54,11 +53,26 @@ class UserService {
 
   getAll(): Promise<UserType[]> {
     return new Promise((resolve, reject) => {
-      User.find()
-        .populate(["roleId", "userDetails"])
+      User.aggregate([
+        {
+          $lookup: {
+            from: "roles",
+            localField: "roleId",
+            foreignField: "_id",
+            as: "roleId",
+          },
+        },
+        {
+          $lookup: {
+            from: "userdetails",
+            localField: "_id",
+            foreignField: "userId",
+            as: "userDetails",
+          },
+        },
+      ])
         .then(resolve)
         .catch(reject);
-      // UserDetail.find().then(resolve).catch(reject);
     });
   }
 }
