@@ -54,14 +54,14 @@ class UserService {
               localField: "_id",
               foreignField: "userId",
               as: "userDetails",
-              // pipeline: [
-              //   {
-              //     $skip: (userDetailsPage - 1) * userDetailsLimit,
-              //   },
-              //   {
-              //     $limit: userDetailsLimit,
-              //   },
-              // ],
+              pipeline: [
+                {
+                  $skip: (userDetailsPage - 1) * userDetailsLimit,
+                },
+                {
+                  $limit: userDetailsLimit,
+                },
+              ],
             },
           },
           {
