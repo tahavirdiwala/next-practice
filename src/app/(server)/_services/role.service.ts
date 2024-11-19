@@ -13,9 +13,10 @@ class RoleService {
     });
   }
 
-  getAll(): Promise<RoleType[]> {
+  getAll(request: NextRequest): Promise<RoleType[]> {
+    const payload = Object.fromEntries(request.nextUrl.searchParams.entries());
     return new Promise((resolve, reject) => {
-      Role.find().then(resolve).catch(reject);
+      Role.find(payload).then(resolve).catch(reject);
     });
   }
 
