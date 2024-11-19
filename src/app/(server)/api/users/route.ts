@@ -14,7 +14,7 @@ async function POST() {
     await userService.add();
     return responser(MESSAGE.users.add, StatusCodes.CREATED);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 
@@ -23,7 +23,7 @@ async function GET(request: NextRequest) {
     const users = await userService.getAll(request);
     return responser(MESSAGE.users.getAll, StatusCodes.OK, users);
   } catch (error) {
-    return responser(`${error}`, StatusCodes.BAD_REQUEST);
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
   }
 }
 
