@@ -79,6 +79,23 @@ class UserService {
         ])
           .then(resolve)
           .catch(reject);
+
+        // const tempArray = [
+        //   {
+        //     userId: "673807121d1f346d91557143",
+        //     roleId: "673c7c867822e57df8a48a18",
+        //   },
+        //   {
+        //     userId: "673807121d1f346d91557143",
+        //     roleId: "673c7c947822e57df8a48a1a",
+        //   },
+        //   {
+        //     userId: "673807121d1f346d91557143",
+        //     roleId: "673c7c9b7822e57df8a48a1c",
+        //   },
+        // ];
+
+        // UserRole.insertMany(tempArray).then(resolve).catch(reject);
       } catch (error) {
         reject(error);
       }
