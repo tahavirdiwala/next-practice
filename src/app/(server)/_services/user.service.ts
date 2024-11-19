@@ -24,6 +24,8 @@ class UserService {
   getAll(request: NextRequest): Promise<UserType[]> {
     const searchParams = request.nextUrl.searchParams;
 
+    const userAddressPayload = Object.fromEntries(searchParams.entries());
+
     const userDetailsPage = Number(searchParams.get("page")) || Pagination.page;
     const userDetailsLimit =
       Number(searchParams.get("limit")) || Pagination.limit;
@@ -69,6 +71,11 @@ class UserService {
               localField: "userDetails.address",
               foreignField: "_id",
               as: "address",
+              pipeline: [
+                {
+                  $match: userAddressPayload,
+                },
+              ],
             },
           },
           {
