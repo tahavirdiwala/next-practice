@@ -1,3 +1,3 @@
-type UserAddress = {
+type UserAddressType = {
   name: string;
 };

@@ -8,7 +8,7 @@ const userAddresses = new mongoose.Schema({
 });
 
 const UserAddresse =
-  mongoose.models.UserAddresse<UserAddress> ||
-  mongoose.model<UserAddress>("UserAddresse", userAddresses);
+  mongoose.models.UserAddresse<UserAddressType> ||
+  mongoose.model<UserAddressType>("UserAddresse", userAddresses);
 
 export default UserAddresse;

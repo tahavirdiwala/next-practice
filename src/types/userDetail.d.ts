@@ -7,7 +7,3 @@ type UserDetailType = {
   address: UserAddress[];
   designation: string;
 };
-
-type UserAddress = {
-  name: string;
-};
