@@ -1,0 +1,3 @@
+type UserAddress = {
+  name: string;
+};

@@ -1,4 +1,3 @@
-import { UserAddress } from "@/types/role";
 import mongoose from "mongoose";
 
 const userAddresses = new mongoose.Schema({
