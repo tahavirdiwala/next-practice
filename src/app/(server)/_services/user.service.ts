@@ -1,6 +1,5 @@
 import { DefaultPagination as Pagination } from "@/app/lib/constant";
 import User from "@/models/user.model";
-import UserDetail from "@/models/userDetail.model";
 import UserRole from "@/models/userRoles.model";
 import { NextRequest } from "next/server";
 
@@ -69,7 +68,12 @@ class UserService {
               from: "useraddresses",
               localField: "userDetails.address",
               foreignField: "_id",
-              as: "userAddresses",
+              as: "address",
+            },
+          },
+          {
+            $project: {
+              "userDetails.address": false,
             },
           },
         ])
@@ -106,17 +110,16 @@ class UserService {
         // )
         //   .then(resolve)
         //   .catch(reject);
-
-        UserDetail.updateMany(
-          { userId: "673807121d1f346d91557143" },
-          {
-            $set: {
-              address: ["673af319cc131bfeaecea904"],
-            },
-          }
-        )
-          .then(resolve)
-          .catch(reject);
+        // UserDetail.updateMany(
+        //   { userId: "673807121d1f346d91557143" },
+        //   {
+        //     $set: {
+        //       address: ["673af319cc131bfeaecea904"],
+        //     },
+        //   }
+        // )
+        //   .then(resolve)
+        //   .catch(reject);
       } catch (error) {
         reject(error);
       }
