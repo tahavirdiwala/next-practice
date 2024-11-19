@@ -1,5 +1,6 @@
 import User from "@/models/user.model";
 import { UserType } from "@/types/user";
+import { NextRequest } from "next/server";
 
 class UserService {
   add() {
@@ -51,8 +52,12 @@ class UserService {
     });
   }
 
-  getAll(): Promise<UserType[]> {
+  getAll(request: NextRequest): Promise<UserType[]> {
     return new Promise((resolve, reject) => {
+      const userAddressPayload = Object.fromEntries(
+        request.nextUrl.searchParams.entries()
+      );
+
       User.aggregate([
         {
           $lookup: {
@@ -96,6 +101,11 @@ class UserService {
                   localField: "address",
                   foreignField: "_id",
                   as: "address",
+                  pipeline: [
+                    {
+                      $match: userAddressPayload,
+                    },
+                  ],
                 },
               },
             ],
