@@ -19,9 +19,8 @@ const userDetailsSchema = new mongoose.Schema({
   },
   address: [
     {
-      name: {
-        type: String,
-      },
+      type: mongoose.Types.ObjectId,
+      ref: "UserAddresse",
     },
   ],
   designation: {

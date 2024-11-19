@@ -6,3 +6,7 @@ type RoleType = {
   description?: string;
   users?: mongoose.Types.ObjectId[];
 };
+
+type UserAddress = {
+  name: string;
+};

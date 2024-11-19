@@ -68,11 +68,53 @@ class UserService {
             localField: "_id",
             foreignField: "userId",
             as: "userDetails",
+            pipeline: [
+              {
+                $group: {
+                  _id: "$userId",
+                  address: {
+                    $addToSet: "$address",
+                  },
+                },
+              },
+              {
+                $project: {
+                  address: {
+                    $reduce: {
+                      input: "$address",
+                      initialValue: [],
+                      in: {
+                        $concatArrays: ["$$this", "$$value"],
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                $lookup: {
+                  from: "useraddresses",
+                  localField: "address",
+                  foreignField: "_id",
+                  as: "address",
+                },
+              },
+            ],
           },
         },
       ])
         .then(resolve)
         .catch(reject);
+
+      // UserDetail.updateMany(
+      //   { userId: "67381ea3632da24bf8196bf9" },
+      //   {
+      //     $set: {
+      //       address: ["673c158c57ba358508ca16ba"],
+      //     },
+      //   }
+      // )
+      //   .then(resolve)
+      //   .catch(reject);
     });
   }
 }
