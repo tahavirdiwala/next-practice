@@ -115,16 +115,7 @@ class UserService {
         .then(resolve)
         .catch(reject);
 
-      // UserDetail.updateMany(
-      //   { userId: "67381ea3632da24bf8196bf9" },
-      //   {
-      //     $set: {
-      //       address: ["673c158c57ba358508ca16ba"],
-      //     },
-      //   }
-      // )
-      //   .then(resolve)
-      //   .catch(reject);
+      // UserDetail.find().then(resolve).catch(reject);
     });
   }
 }
