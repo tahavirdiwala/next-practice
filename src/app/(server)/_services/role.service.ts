@@ -68,9 +68,7 @@ class RoleService {
 
         role.users.push(...payload.users);
 
-        await role.save().then(() => {
-          resolve(true);
-        });
+        await role.save().then(resolve).catch(reject);
       } catch (error) {
         reject(error);
       }
