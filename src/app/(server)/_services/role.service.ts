@@ -24,11 +24,11 @@ class RoleService {
   get(_id: string): Promise<RoleType> {
     return new Promise((resolve, reject) => {
       // Role.findOne({ _id }).then(resolve).catch(reject);
-
+      const objectId = new mongoose.Types.ObjectId(_id);
       Role.aggregate([
         {
           $match: {
-            _id: new mongoose.Types.ObjectId(_id),
+            _id: objectId,
           },
         },
       ])
