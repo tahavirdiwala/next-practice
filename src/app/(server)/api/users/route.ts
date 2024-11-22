@@ -18,9 +18,9 @@ async function POST(request: NextRequest) {
   }
 }
 
-async function GET(request: NextRequest) {
+async function GET() {
   try {
-    const users = await userService.getAll(request);
+    const users = await userService.getAll();
     return responser(MESSAGE.users.getAll, StatusCodes.OK, users);
   } catch (error) {
     return responser(error as Error, StatusCodes.BAD_REQUEST);
