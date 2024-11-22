@@ -1,5 +1,6 @@
 import Role from "@/models/role.model";
 import { RoleType } from "@/types/role";
+import mongoose from "mongoose";
 import { NextRequest } from "next/server";
 
 class RoleService {
@@ -22,7 +23,19 @@ class RoleService {
 
   get(_id: string): Promise<RoleType> {
     return new Promise((resolve, reject) => {
-      Role.findOne({ _id }).then(resolve).catch(reject);
+      // Role.findOne({ _id }).then(resolve).catch(reject);
+
+      Role.aggregate([
+        {
+          $match: {
+            _id: new mongoose.Types.ObjectId(_id),
+          },
+        },
+      ])
+        .then((resp) => {
+          resolve(resp[0]);
+        })
+        .catch(reject);
     });
   }
 }
