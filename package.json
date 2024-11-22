@@ -9,11 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.59.20",
-    "@trpc/client": "^11.0.0-rc.630",
-    "@trpc/next": "^11.0.0-rc.630",
-    "@trpc/react-query": "^11.0.0-rc.630",
-    "@trpc/server": "^11.0.0-rc.630",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
     "express": "^4.21.1",
