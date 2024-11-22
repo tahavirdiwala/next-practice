@@ -8,10 +8,10 @@ import { NextRequest } from "next/server";
 await connectDb();
 const { responser } = commonDecorators;
 
-async function POST() {
+async function POST(request: NextRequest) {
   try {
-    // await userService.add(request);
-    await userService.add();
+    await userService.add(request);
+    // await userService.add();
     return responser(MESSAGE.users.add, StatusCodes.CREATED);
   } catch (error) {
     return responser(error as Error, StatusCodes.BAD_REQUEST);

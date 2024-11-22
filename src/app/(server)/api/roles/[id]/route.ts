@@ -21,4 +21,17 @@ async function GET(
   }
 }
 
-export { GET };
+async function PUT(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const id = (await context.params).id;
+    await roleService.edit(id, request);
+    return responser(MESSAGE.roles.edit, StatusCodes.OK);
+  } catch (error) {
+    return responser(error as Error, StatusCodes.BAD_REQUEST);
+  }
+}
+
+export { GET, PUT };

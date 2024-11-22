@@ -17,7 +17,27 @@ class RoleService {
 
   getAll(): Promise<RoleType[]> {
     return new Promise((resolve, reject) => {
-      Role.find().then(resolve).catch(reject);
+      // Role.find().then(resolve).catch(reject);
+      Role.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "users",
+            foreignField: "_id",
+            as: "users",
+            pipeline: [
+              {
+                $project: {
+                  roleId: 0,
+                  userDetails: 0,
+                },
+              },
+            ],
+          },
+        },
+      ])
+        .then(resolve)
+        .catch(reject);
     });
   }
 
@@ -36,6 +56,24 @@ class RoleService {
           resolve(resp[0]);
         })
         .catch(reject);
+    });
+  }
+
+  edit(id: string, request: NextRequest) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const role = await Role.findOne({ _id: id });
+
+        const payload = await request.json();
+
+        role.users.push(...payload.users);
+
+        await role.save().then(() => {
+          resolve(true);
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }

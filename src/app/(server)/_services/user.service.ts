@@ -3,7 +3,7 @@ import { UserType } from "@/types/user";
 import { NextRequest } from "next/server";
 
 class UserService {
-  add() {
+  add(request: NextRequest) {
     return new Promise(async (resolve, reject) => {
       try {
         // const total = 100000;
@@ -46,6 +46,10 @@ class UserService {
         // )
         //   .then(resolve)
         //   .catch(reject);
+
+        User.create(await request.json())
+          .then(resolve)
+          .catch(reject);
       } catch (error) {
         reject(error);
       }
