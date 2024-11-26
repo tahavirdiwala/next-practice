@@ -8,11 +8,11 @@ API.interceptors.request.use((response) => {
   if (["post", "put"].includes(response.method || "")) {
     const payload = response.data;
 
-    for (const key in payload) {
+    Object.keys(payload).forEach((key) => {
       if (typeof payload[key] === "string") {
         payload[key] = payload[key].trim();
       }
-    }
+    });
 
     return { ...response, data: payload };
   }
