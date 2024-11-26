@@ -1,22 +1,31 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import roleService from "../_services/role.service";
+import { RoleType } from "@/types/role";
 
 export const RoleList = () => {
   const [role, setRole] = useState("");
+  const [roleList, setRoleList] = useState<ApiResponse<RoleType[]>>();
 
-  const handleSet = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    roleService.getAll().then(setRoleList);
+  }, []);
+
+  const handleSetRole = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRole(e.target.value);
   };
 
-  const handleAdd = async () => {
+  const handleAddRole = async () => {
     await roleService.add({ role });
   };
 
   return (
     <React.Fragment>
-      <input name="role" placeholder="add role" onChange={handleSet} />
-      <button onClick={handleAdd}>add role</button>
+      <input name="role" placeholder="add role" onChange={handleSetRole} />
+      <button onClick={handleAddRole}>add role</button>
+      {roleList?.data?.map((item) => (
+        <li key={item._id}>{item.role}</li>
+      ))}
     </React.Fragment>
   );
 };
