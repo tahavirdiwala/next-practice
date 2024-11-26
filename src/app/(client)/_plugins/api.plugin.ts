@@ -10,7 +10,7 @@ API.interceptors.request.use((response) => {
 
     for (const key in payload) {
       if (typeof payload[key] === "string") {
-        payload[key] = payload[key]?.trim();
+        payload[key] = payload[key].trim();
       }
     }
 
