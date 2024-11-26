@@ -23,6 +23,7 @@ export const RoleList = () => {
     <React.Fragment>
       <input name="role" placeholder="add role" onChange={handleSetRole} />
       <button onClick={handleAddRole}>add role</button>
+
       {roleList?.data?.map((item) => (
         <li key={item._id}>{item.role}</li>
       ))}
