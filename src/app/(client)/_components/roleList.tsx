@@ -11,8 +11,8 @@ export const RoleList = () => {
     roleService.getAll().then(setRoleList);
   }, []);
 
-  const handleSetRole = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRole(e.target.value);
+  const handleSetRole = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRole(event.target.value);
   };
 
   const handleAddRole = async () => {
