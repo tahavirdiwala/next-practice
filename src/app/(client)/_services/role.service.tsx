@@ -5,6 +5,7 @@ class RoleService {
   add(payload: RoleType) {
     return POST<RoleType>("/roles", payload);
   }
+
   getAll() {
     return GET<RoleType[]>("/roles");
   }
