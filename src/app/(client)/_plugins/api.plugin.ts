@@ -19,12 +19,12 @@ API.interceptors.request.use((response) => {
   return response;
 });
 
-const GET = async <T>(url: string, config?: AxiosRequestConfig) => {
-  return API.get<ApiResponse<T>>(url, config).then((res) => res.data);
-};
-
 const POST = async <T>(url: string, payload: object) => {
   return API.post<ApiResponse<T>>(url, payload).then((res) => res.data);
+};
+
+const GET = async <T>(url: string, config?: AxiosRequestConfig) => {
+  return API.get<ApiResponse<T>>(url, config).then((res) => res.data);
 };
 
 export { POST, GET };
