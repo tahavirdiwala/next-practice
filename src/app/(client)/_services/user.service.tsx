@@ -1,11 +1,11 @@
-import axios from "axios";
+import { GET, POST } from "../_plugins/api.plugin";
 
 class UserService {
-  add(payload: unknown) {
-    return axios.post("/api/users", payload);
+  add(payload: object) {
+    return POST("/users", payload);
   }
   getAll() {
-    return axios.get("/api/users");
+    return GET("/users");
   }
 }
 
