@@ -1,8 +1,14 @@
+import { Suspense } from "react";
+import { RoleList } from "../_components/roleList";
+
 export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
 
 const Roles = () => {
-  return <></>;
+  return (
+    <Suspense fallback={"loading.."}>
+      <RoleList />
+    </Suspense>
+  );
 };
 
 export default Roles;

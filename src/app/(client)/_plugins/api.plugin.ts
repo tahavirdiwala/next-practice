@@ -5,7 +5,6 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((response) => {
-  console.log("response", response);
   return response;
 });
 

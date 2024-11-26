@@ -1,10 +1,9 @@
-import axios from "axios";
-import { GET } from "../_plugins/api.plugin";
+import { GET, POST } from "../_plugins/api.plugin";
 import { RoleType } from "@/types/role";
 
 class RoleService {
-  add(payload: unknown) {
-    return axios.post("/api/roles", payload);
+  add(payload: RoleType) {
+    return POST<RoleType>("/roles", payload);
   }
   getAll() {
     return GET<RoleType[]>("/roles");
