@@ -5,6 +5,17 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((response) => {
+  if (response.method === "post" || response.method === "put") {
+    const payload = response.data;
+
+    for (const key in payload) {
+      if (typeof payload[key] === "string") {
+        payload[key] = payload[key]?.trim();
+      }
+    }
+
+    return { ...response, data: payload };
+  }
   return response;
 });
 

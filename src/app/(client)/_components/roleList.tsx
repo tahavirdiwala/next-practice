@@ -1,18 +1,22 @@
 "use client";
-
-import { RoleType } from "@/types/role";
+import React, { useState } from "react";
 import roleService from "../_services/role.service";
 
 export const RoleList = () => {
-  const handleAdd = async (payload) => {
-    console.log("payload", payload);
+  const [role, setRole] = useState("");
 
-    // await roleService.add(payload);
+  const handleSet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRole(e.target.value);
+  };
+
+  const handleAdd = async () => {
+    await roleService.add({ role });
   };
 
   return (
-    <form onSubmit={handleAdd}>
-      <input name="role" placeholder="add role" />
-    </form>
+    <React.Fragment>
+      <input name="role" placeholder="add role" onChange={handleSet} />
+      <button onClick={handleAdd}>add role</button>
+    </React.Fragment>
   );
 };
