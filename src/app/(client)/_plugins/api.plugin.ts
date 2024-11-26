@@ -5,7 +5,7 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((response) => {
-  if (["post", "put"].includes(response.method || "")) {
+  if (response.method && ["post", "put"].includes(response.method)) {
     const payload = response.data;
 
     Object.keys(payload).forEach((key) => {
