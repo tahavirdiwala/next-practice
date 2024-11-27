@@ -14,9 +14,12 @@ class RoleService {
     });
   }
 
-  getAll(): Promise<RoleType[]> {
+  getAll(payload: NextRequest): Promise<RoleType[]> {
     return new Promise((resolve, reject) => {
-      // Role.find().then(resolve).catch(reject);
+      const { page = 1, limit = 100 } = Object.fromEntries(
+        payload.nextUrl.searchParams.entries()
+      );
+
       Role.aggregate([
         {
           $lookup: {
@@ -33,6 +36,12 @@ class RoleService {
               },
             ],
           },
+        },
+        {
+          $skip: (Number(page) - 1) * Number(limit),
+        },
+        {
+          $limit: Number(limit),
         },
       ])
         .then(resolve)

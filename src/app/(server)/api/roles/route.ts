@@ -17,9 +17,9 @@ async function POST(request: NextRequest) {
   }
 }
 
-async function GET() {
+async function GET(request: NextRequest) {
   try {
-    const roles = await roleService.getAll();
+    const roles = await roleService.getAll(request);
     return responser(MESSAGE.roles.getAll, StatusCodes.OK, roles);
   } catch (error) {
     return responser(error as Error, StatusCodes.BAD_REQUEST);
