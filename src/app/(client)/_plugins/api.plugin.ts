@@ -1,23 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { requestInterceptor } from "../_utils";
 
 const API = axios.create({
   baseURL: "http://localhost:3000/api",
 });
 
-API.interceptors.request.use((response) => {
-  if (response.method && ["post", "put"].includes(response.method)) {
-    const payload = response.data;
-
-    Object.keys(payload).forEach((key) => {
-      if (typeof payload[key] === "string") {
-        payload[key] = payload[key].trim();
-      }
-    });
-
-    return { ...response, data: payload };
-  }
-  return response;
-});
+API.interceptors.request.use(requestInterceptor);
 
 const POST = async <T>(url: string, payload: object) => {
   return API.post<ApiResponse<T>>(url, payload).then((res) => res.data);
