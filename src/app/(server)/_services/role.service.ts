@@ -1,6 +1,7 @@
 import Role from "@/models/role.model";
 import { RoleType } from "@/types/role";
 import { NextRequest } from "next/server";
+import utilityDecorators from "../utils";
 
 class RoleService {
   add(request: NextRequest): Promise<RoleType> {
@@ -16,36 +17,32 @@ class RoleService {
 
   getAll(payload: NextRequest): Promise<RoleType[]> {
     return new Promise((resolve, reject) => {
-      const { page = 1, limit = 100 } = Object.fromEntries(
-        payload.nextUrl.searchParams.entries()
-      );
-
-      Role.aggregate([
-        {
-          $lookup: {
-            from: "users",
-            localField: "users",
-            foreignField: "_id",
-            as: "users",
-            pipeline: [
-              {
-                $project: {
-                  roleId: 0,
-                  userDetails: 0,
+      try {
+        const pagination = utilityDecorators.getPaginatedList(payload);
+        Role.aggregate([
+          {
+            $lookup: {
+              from: "users",
+              localField: "users",
+              foreignField: "_id",
+              as: "users",
+              pipeline: [
+                {
+                  $project: {
+                    roleId: 0,
+                    userDetails: 0,
+                  },
                 },
-              },
-            ],
+              ],
+            },
           },
-        },
-        {
-          $skip: (Number(page) - 1) * Number(limit),
-        },
-        {
-          $limit: Number(limit),
-        },
-      ])
-        .then(resolve)
-        .catch(reject);
+          ...pagination,
+        ])
+          .then(resolve)
+          .catch(reject);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 
