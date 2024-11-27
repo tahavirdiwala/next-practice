@@ -52,9 +52,7 @@ class RoleService {
           },
         },
       ])
-        .then((resp) => {
-          resolve(resp[0]);
-        })
+        .then((resp) => resolve(resp[0]))
         .catch(reject);
     });
   }
