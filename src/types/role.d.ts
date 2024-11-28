@@ -4,5 +4,5 @@ type RoleType = {
   _id?: string;
   role: string;
   description?: string;
-  users?: mongoose.Types.ObjectId[];
+  users?: mongoose.Schema.ObjectId[];
 };

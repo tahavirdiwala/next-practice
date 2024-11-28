@@ -3,7 +3,7 @@ import { UserDetailType } from "@/types/userDetail";
 
 const userDetailsSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: "User",
     index: true,
     required: true,
@@ -19,7 +19,7 @@ const userDetailsSchema = new mongoose.Schema({
   },
   address: [
     {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: "UserAddresse",
     },
   ],

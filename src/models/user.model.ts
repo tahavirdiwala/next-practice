@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
   ],
   userDetails: [
     {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: "UserDetail",
       index: true,
     },
