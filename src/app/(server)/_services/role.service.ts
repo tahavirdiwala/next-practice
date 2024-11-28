@@ -1,7 +1,7 @@
 import Role from "@/models/role.model";
 import { RoleType } from "@/types/role";
 import { NextRequest } from "next/server";
-import utilityDecorators from "../utils";
+import utilityDecorators from "../_utils";
 
 class RoleService {
   add(request: NextRequest): Promise<RoleType> {
