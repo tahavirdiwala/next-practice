@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 
 class UtilityDecorators {
-  getPaginatedList(payload: NextRequest) {
+  async getPaginatedList(payload: NextRequest) {
     const { limit = 1, page = 1 } = Object.fromEntries(
       payload.nextUrl.searchParams.entries()
     );

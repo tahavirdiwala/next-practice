@@ -16,9 +16,9 @@ class RoleService {
   }
 
   getAll(payload: NextRequest): Promise<RoleType[]> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
-        const pagination = utilityDecorators.getPaginatedList(payload);
+        const pagination = await utilityDecorators.getPaginatedList(payload);
         Role.aggregate([
           {
             $lookup: {
